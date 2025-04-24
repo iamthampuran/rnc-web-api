@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create-db": "ts-node src/config/create-db.ts",
+    "migrate": "npx sequelize-cli db:migrate",
+    "start": "ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -16,5 +19,18 @@
     "url": "https://github.com/iamthampuran/rnc-web-api/issues"
   },
   "homepage": "https://github.com/iamthampuran/rnc-web-api#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "sequelize": "^6.37.7",
+    "tedious": "^18.6.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.14.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
 }
