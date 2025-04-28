@@ -1,42 +1,33 @@
 import { Sequelize } from 'sequelize';
-import 'dotenv/config';
+import dotenv from 'dotenv';
+dotenv.config();
 
-(async () => {
-  const {
-    DB_HOST,        // e.g. "localhost"
-    DB_INSTANCE,    // new: e.g. "SQLEXPRESS"
-    DB_USER,
-    DB_PASSWORD,
-    DB_NAME
-  } = process.env;
-
-  const sequelize = new Sequelize('master', DB_USER!, DB_PASSWORD!, {
-    host: DB_HOST,            // e.g. "localhost"
-    // **no** port if you’re using instanceName
-    dialect: 'mssql',
-    logging: false,
-    dialectOptions: {
-      instanceName: DB_INSTANCE,       // e.g. "SQLEXPRESS"
-      options: {
-        encrypt: false,                // for local dev
-        trustServerCertificate: true   // trust self‐signed
-      }
+// Connect to "master" so we can CREATE DATABASE
+const sequelize = new Sequelize('master', process.env.DB_USER!, process.env.DB_PASSWORD!, {
+  host: process.env.DB_HOST,               // e.g. 'localhost'
+  port: 1433,                  // now fixed
+  dialect: 'mssql',
+  dialectOptions: {
+    options: {
+      encrypt: false,
+      trustServerCertificate: true
     }
-  });
+  },
+  logging: false
+});
 
+
+async function createDatabase() {
   try {
     await sequelize.authenticate();
-    console.log('✔ Connected to master');
-    
-    await sequelize.query(`
-      IF DB_ID(N'${DB_NAME}') IS NULL
-        CREATE DATABASE [${DB_NAME}];
-    `);
-    console.log(`✔ Database "${DB_NAME}" ensured.`);
-  } catch (err) {
-    console.error('✖ Connection failed:', err);
-    process.exit(1);
+    console.log('✅ Connected to SQL Server');
+    await sequelize.query(`CREATE DATABASE [${process.env.DB_NAME}]`);
+    console.log(`✅ Database "${process.env.DB_NAME}" created`);
+  } catch (e) {
+    console.error('❌ Error creating database:', e);
   } finally {
     await sequelize.close();
   }
-})();
+}
+
+createDatabase();
