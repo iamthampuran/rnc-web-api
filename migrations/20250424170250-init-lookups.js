@@ -30,9 +30,11 @@ module.exports = {
     
         // 2) Seed data
         await queryInterface.bulkInsert('Branch', [
-          { name: 'Computer Science Engineering' },
-          { name: 'Mechanical Engineering' },
-          { name: 'Electrical Engineering' },
+          { name: 'Computer Science Engineering'},
+          { name: 'Mechanical Engineering'},
+          { name: 'Electronics and Communication Engineering'},
+          { name: 'Electrical and Electronics Engineering'},
+          { name: 'Civil Engineering'}
         ], {});
     
         await queryInterface.bulkInsert('UserRole', [
