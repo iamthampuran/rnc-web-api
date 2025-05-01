@@ -3,11 +3,20 @@ import bodyParser from 'body-parser';
 import { Sequelize } from 'sequelize';
 import signup from './routes/auth.routes'; // Adjust the path as necessary
 import getBranches  from './routes/lookup.routes'; // Adjust the path as necessary
+import cors from 'cors';
 
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+
+//enable CORS
+app.use(cors({
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Middleware
 app.use(bodyParser.json());
@@ -34,7 +43,7 @@ const sequelize = new Sequelize(process.env.DB_NAME!, process.env.DB_USER!, proc
 
 // Routes
 
-app.use('/signup', signup);
+app.use('/auth', signup);
 app.use('/lookup', getBranches)
 
 // Start server
