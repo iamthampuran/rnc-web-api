@@ -8,6 +8,7 @@ export class User extends Model {
   public branchId!: number;
   public ocrId!: string;
   public passwordHash!: string;
+  public roleId!: number;
 }
 
 User.init(
@@ -25,6 +26,7 @@ User.init(
     branchId: DataTypes.INTEGER,
     ocrId: DataTypes.STRING,
     passwordHash: DataTypes.STRING,
+    roleId: DataTypes.INTEGER,
   },
   {
     sequelize,

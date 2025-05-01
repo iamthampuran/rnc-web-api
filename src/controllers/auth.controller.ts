@@ -1,6 +1,7 @@
 import { User } from "../models/user";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
+import { UserRole } from "../enums/user-roles";
 
 export const signup = async (req: Request, res: Response) => {
     try{
@@ -16,7 +17,8 @@ export const signup = async (req: Request, res: Response) => {
             email,
             branchId,
             passwordHash,
-            ocrId: ocrId || null
+            ocrId: ocrId || null,
+            roleId: UserRole.Faculty 
         });
         return res.status(201).json({ message: "User created successfully", user: newUser.id });
     }
