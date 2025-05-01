@@ -5,7 +5,7 @@ dotenv.config();
 // Connect to "master" so we can CREATE DATABASE
 const sequelize = new Sequelize('master', process.env.DB_USER!, process.env.DB_PASSWORD!, {
   host: process.env.DB_HOST,               // e.g. 'localhost'
-  port: 1433,                  // now fixed
+  port: Number(process.env.DB_PORT),                  // now fixed
   dialect: 'mssql',
   dialectOptions: {
     options: {
