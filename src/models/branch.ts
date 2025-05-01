@@ -14,10 +14,6 @@ Branch.init(
             primaryKey: true,
         },
         name: DataTypes.STRING,
-        email: {
-            type: DataTypes.STRING,
-            unique: true,
-        },
     },
     {
         sequelize,
