@@ -4,6 +4,7 @@ import { Sequelize } from 'sequelize';
 import signup from './routes/auth.routes'; // Adjust the path as necessary
 import getBranches  from './routes/lookup.routes'; // Adjust the path as necessary
 import cors from 'cors';
+import sequelize from './config/database';
 
 require('dotenv').config();
 
@@ -22,19 +23,6 @@ app.use(cors({
 app.use(bodyParser.json());
 
 //connect to database
-const sequelize = new Sequelize(process.env.DB_NAME!, process.env.DB_USER!, process.env.DB_PASSWORD!, {
-  host: process.env.DB_HOST,               // e.g. 'localhost'
-  port: Number(process.env.DB_PORT),                  // now fixed
-  dialect: 'mssql',
-  dialectOptions: {
-    options: {
-      encrypt: false,
-      trustServerCertificate: true
-    }
-  },
-  logging: false
-});
-
   sequelize.authenticate().then(() => {
     console.log('✅ Connected to SQL Server');
   }).catch((e) =>{
