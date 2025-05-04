@@ -52,12 +52,7 @@ module.exports = {
         onUpdate:'CASCADE',
         onDelete:'CASCADE'
       },
-      createdAt:{type:Sequelize.DATE, defaultValue:new Date()},
-      updatedAt:{type:Sequelize.DATE, defaultValue:new Date()}
-    });
-
-    await queryInterface.createTable('UserPublications', {
-      userId: {
+      createdUserId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -67,16 +62,8 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       },
-      publicationId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Publications',
-          key: 'id'
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-      }
+      createdAt:{type:Sequelize.DATE, defaultValue:new Date()},
+      updatedAt:{type:Sequelize.DATE, defaultValue:new Date()}
     });
 
     await queryInterface.bulkInsert('PublicationStatus', [
