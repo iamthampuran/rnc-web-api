@@ -62,6 +62,16 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       },
+      branchId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Branch',
+          key: 'id'
+        },
+        onDelete: 'NO ACTION',
+        onUpdate: 'NO ACTION'
+      },
       createdAt:{type:Sequelize.DATE, defaultValue:new Date()},
       updatedAt:{type:Sequelize.DATE, defaultValue:new Date()}
     });
