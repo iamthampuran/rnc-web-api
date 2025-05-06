@@ -1,10 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import signup from './routes/auth.routes'; // Adjust the path as necessary
-import getBranches  from './routes/lookup.routes'; // Adjust the path as necessary
+import auth from './routes/auth.routes'; // Adjust the path as necessary
+import lookup  from './routes/lookup.routes'; // Adjust the path as necessary
 import cors from 'cors';
 import sequelize from './config/database';
-import addPublication from './routes/publication.routes'; // Adjust the path as necessary
+import publications from './routes/publication.routes'; // Adjust the path as necessary
 
 require('dotenv').config();
 
@@ -31,9 +31,9 @@ app.use(bodyParser.json());
 
 // Routes
 
-app.use('/auth', signup);
-app.use('/lookup', getBranches);
-app.use('/publication', addPublication); 
+app.use('/auth', auth);
+app.use('/lookup', lookup);
+app.use('/publication', publications); 
 
 // Start server
 app.listen(PORT, () => {
