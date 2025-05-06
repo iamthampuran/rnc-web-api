@@ -15,14 +15,14 @@ module.exports = {
         userId: {
           type: Sequelize.INTEGER, allowNull: false,
           references: { model: 'Users', key: 'id' },
-          onDelete: 'CASCADE',         // user deletions WILL cascade
+          onDelete: 'NO ACTION',         // user deletions WILL cascade
           onUpdate: 'CASCADE'
         },
         publicationId: {
           type: Sequelize.INTEGER, allowNull: false,
           references: { model: 'Publications', key: 'id' },
           onDelete: 'NO ACTION',       // publication deletions will NOT cascade
-          onUpdate: 'NO ACTION'
+          onUpdate: 'CASCADE'
         }
       })
     }

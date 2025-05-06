@@ -30,7 +30,7 @@ module.exports = {
           key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'NO ACTION'
       },
       subtypeId: {
         type: Sequelize.INTEGER,
@@ -40,7 +40,7 @@ module.exports = {
           key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'NO ACTION'
       },
       statusId:{
         type: Sequelize.INTEGER,
@@ -50,7 +50,7 @@ module.exports = {
           key:'id'
         },
         onUpdate:'CASCADE',
-        onDelete:'CASCADE'
+        onDelete:'NO ACTION'
       },
       createdUserId: {
         type: Sequelize.INTEGER,
@@ -59,7 +59,7 @@ module.exports = {
           model: 'Users',
           key: 'id'
         },
-        onDelete: 'CASCADE',
+        onDelete: 'NO ACTION',
         onUpdate: 'CASCADE'
       },
       branchId: {
@@ -70,7 +70,7 @@ module.exports = {
           key: 'id'
         },
         onDelete: 'NO ACTION',
-        onUpdate: 'NO ACTION'
+        onUpdate: 'CASCADE'
       },
       createdAt:{type:Sequelize.DATE, defaultValue:new Date()},
       updatedAt:{type:Sequelize.DATE, defaultValue:new Date()}
