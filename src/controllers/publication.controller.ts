@@ -20,7 +20,6 @@ export const addPublication = async (req: Request, res: Response) => {
             facultyIds,
         } = req.body;
 
-        console.log("Received data:", req.body);
         // Create the publication with default status "requested"
         const newPublication = await Publication.create(
             {
