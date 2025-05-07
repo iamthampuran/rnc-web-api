@@ -1,5 +1,5 @@
 import express from "express";
-import { getBranches, getLookups } from "../controllers/lookup.controller";
+import { getBranches, getLookups, getUsersByRoleId } from "../controllers/lookup.controller";
 
 const router = express.Router();
 
@@ -16,6 +16,15 @@ router.get("/all", async (req, res, next) => {
         await getLookups(req, res);
     }  catch (error) {
         next(error); 
+    }
+});
+
+router.get("/users/:roleId", async (req, res, next) => {
+    try{
+        await getUsersByRoleId(req, res);
+    }
+    catch (error) {
+        next(error);
     }
 });
 
