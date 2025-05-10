@@ -21,11 +21,11 @@ module.exports = {
         });
         await queryInterface.createTable('Type', {
           id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-          type_name: { type: Sequelize.STRING, allowNull: false }
+          name: { type: Sequelize.STRING, allowNull: false }
         });
         await queryInterface.createTable('SubType', {
           id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-          subtype_name: { type: Sequelize.STRING, allowNull: false }
+          name: { type: Sequelize.STRING, allowNull: false }
         });
     
         // 2) Seed data
@@ -44,17 +44,17 @@ module.exports = {
         ], {});
     
         await queryInterface.bulkInsert('Type', [
-          { type_name: 'Journal' },
-          { type_name: 'Conference' },
-          { type_name: 'Book' },
+          { name: 'Journal' },
+          { name: 'Conference' },
+          { name: 'Book' },
         ], {});
     
         await queryInterface.bulkInsert('SubType', [
-          { subtype_name: 'SCI' },
-          { subtype_name: 'SCOPUS' },
-          { subtype_name: 'National' },
-          { subtype_name: 'International' },
-          { subtype_name: 'Other' },
+          { name: 'SCI' },
+          { name: 'SCOPUS' },
+          { name: 'National' },
+          { name: 'International' },
+          { name: 'Other' },
         ], {});
     
 

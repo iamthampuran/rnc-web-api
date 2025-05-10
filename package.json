@@ -6,6 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "create-db": "ts-node src/config/create-db.ts",
     "migrate": "npx sequelize-cli db:migrate",
+    "undo": "sequelize-cli db:migrate:undo",
     "start": "ts-node src/index.ts"
   },
   "repository": {
