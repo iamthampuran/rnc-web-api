@@ -104,8 +104,6 @@ export const getPublicationsOfUsersByStatus = async (req: Request, res: Response
             p.createdUserId = ${userId}
         AND p.statusId = ${status} 
         `;
-        console.log(query); // Log the query for debugging
-
         const publicationDetails = await sequelize.query(query);
 
         return res.status(200).json(publicationDetails[0]);
