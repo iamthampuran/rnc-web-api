@@ -65,6 +65,10 @@ export const addPublication = async (req: Request, res: Response) => {
 export const getPublicationsOfUsersByStatus = async (req: Request, res: Response) => {
     const { status, userId } = req.params; // Get the status from query parameters
 
+    let whereClause = `WHERE p.statusId = ${status}`;
+    if (userId) {
+        whereClause += ` AND p.createdUserId = ${userId}`;
+    }
     try {
         const query = `SELECT 
             p.id,
@@ -100,9 +104,7 @@ export const getPublicationsOfUsersByStatus = async (req: Request, res: Response
             GROUP BY 
                 up.publicationId
         ) f ON p.id = f.publicationId
-        WHERE 
-            p.createdUserId = ${userId}
-        AND p.statusId = ${status} 
+        ${whereClause}
         `;
         const publicationDetails = await sequelize.query(query);
 
@@ -111,4 +113,31 @@ export const getPublicationsOfUsersByStatus = async (req: Request, res: Response
         console.error("Error fetching publications:", error);
         return res.status(500).json({ message: "Internal server error" });
     }
+}
+
+export const updatePublicatoinStatus = async (req: Request, res: Response) => {
+    const statusId = req.body.statusId;
+    const publicationId = req.params.id;
+
+
+    // Find the publication by ID
+    const publication = await Publication.findByPk(publicationId);
+
+    if (!publication) {
+        return res.status(404).json({ message: "Publication not found" });
+    }
+
+    // Update the status of the publication
+    publication.statusId = statusId;
+    await publication.save().then(() => {
+        return res.status(200).json({
+            message: "Publication status updated successfully",
+            publicationId: publication.id,
+        });
+    }).catch((error) => {
+        console.error("Error updating publication status:", error);
+        return res.status(500).json({ message: "Internal server error" });
+
+    });
+
 }

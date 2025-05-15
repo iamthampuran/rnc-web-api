@@ -1,5 +1,5 @@
 import express from "express";
-import { addPublication, getPublicationsOfUsersByStatus } from "../controllers/publication.controller";
+import { addPublication, getPublicationsOfUsersByStatus, updatePublicatoinStatus } from "../controllers/publication.controller";
 
 const router = express.Router();
 
@@ -19,6 +19,25 @@ router.get("/getAll/:userId/:status", async (req, res, next) => {
         await getPublicationsOfUsersByStatus(req, res);
     }
     catch (error) {
+        next(error);
+    }
+});
+
+router.get("/getAll/:status", async (req, res, next) => {
+    try {
+
+        await getPublicationsOfUsersByStatus(req, res);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+
+router.put("/update/:id", async (req, res, next) => {
+    try {
+        // Call the controller function to update the publication
+        await updatePublicatoinStatus(req, res);
+    } catch (error) {
         next(error);
     }
 });
