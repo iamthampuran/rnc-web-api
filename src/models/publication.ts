@@ -12,7 +12,7 @@ export class Publication extends Model {
     public impactFactor!: string;
     public typeId!: number;
     public subTypeId!: number;
-    public status: number = PublicationStatus.requested; // PublicationStatus
+    public statusId: number = PublicationStatus.requested; // PublicationStatus
     public createdUserId!: number;
     public branchId!: number;
     public createdAt!: Date;
